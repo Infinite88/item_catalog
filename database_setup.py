@@ -49,5 +49,5 @@ class MangaDB(Base):
         }
 
 
-engine = create_engine('postgresql://godfrey:Per167Fect@localhost:5432/manga')
+engine = create_engine('postgresql://godfrey:Per167*Fect@localhost:5432/manga')
 Base.metadata.create_all(engine)
