@@ -1,0 +1,17 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.card {
+    display: inline-block;
+    margin: 3vh 1em;
+}
+
+img{
+    height: 400px;
+
+}
+
+nav {
+    padding: 0 20px;
+}

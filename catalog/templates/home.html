@@ -1,0 +1,20 @@
+{%  extends 'layout.html' %}
+
+{% block body %}
+    <div class="mdl-grid row">
+    {% include "flash.html" %}
+    {% for item in manga %}
+        <div class="col s12 m6 l3">
+        <div class="card medium">
+            <div class="card-image waves-effect waves-block waves-light" >
+                <a href="{{ url_for('itemInfo', name=item.name, genre=item.genre) }}"><img  src="{{ item.image }}"></a>
+            </div>
+            <div class="card-content">
+              <span class="card-title grey-text text-darken-4">{{ item.name }}</span>
+              <span class="card-title grey-text text-darken-4">{{ item.authorName }}</span>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

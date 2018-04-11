@@ -1,0 +1,28 @@
+ <header>
+    <div class="mdl-layout__drawer">
+     <div class="navbar-fixed">
+         <nav class="mdl-navigation purple darken-4">
+             <div class="nav-wrapper ">
+                 <a href="/" class="brand-logo">Manga</a>
+                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                     <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Action')}}">Action</a></li>
+                     <li><a href="/">Adventure</a></li>
+                     <li><a href="/">Comedy</a></li>
+                     <li><a href="/">Drama</a></li>
+                     <li><a href="/">Fantasy</a></li>
+                     <li><a href="/">Supernatural</a></li>
+                     <li><a href="/">Horror</a></li>
+                     <li><a href="/">Mystery</a></li>
+                     <li class="active"><a href="/">Sci-Fi</a></li>
+
+                     <li><a href="{{ url_for('newItem') }}" class=><i class="material-icons">add</i></a></li>
+                     {% if session.get('provider') == 'google' %}
+                         <li><a href="{{ url_for('logout') }}"><button class="waves-effect waves-light btn">Logout</button></a></li>
+                     {% else %}
+                        <li><a href="{{ url_for('showLogin') }}" class="waves-effect waves-light btn">Login</a></li>
+                     {% endif %}
+                 </ul>
+             </div>
+         </nav>
+     </div></div>
+ </header>

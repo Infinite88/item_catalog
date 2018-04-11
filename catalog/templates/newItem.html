@@ -1,0 +1,18 @@
+{%  extends 'layout.html' %}
+
+{% block body %}
+    <h1>New Item</h1>
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <label for="authorName">Author:</label>
+        <input type="text" name="authorName" id="authorname">
+        <label for="genre">Genre:</label>
+        <input type="text" name="genre" id="genre">
+        <label for="image">image:</label>
+        <input type="text" name="image" id="image">
+        <label for="name">Description:</label>
+        <textarea type="text" name="description" id="description"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
