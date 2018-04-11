@@ -1,5 +1,2 @@
-Flask == 0.9
-SQLAlchemy == 0.8.4
-Requests == 2.7.0
-dicttoxml == 1.6.6
-httplib2 == 0.9.1
+flask
+

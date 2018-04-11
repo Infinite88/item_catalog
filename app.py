@@ -14,7 +14,7 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from functools import wraps
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://godfrey:Per167Fect@localhost:5432/manga'
 
 engine = create_engine('postgresql://godfrey:Per167Fect@localhost:5432/manga')
@@ -59,21 +59,21 @@ def showLogin():
                     for x in range(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
-    return render_template('login.html', STATE=state)
+    return flask.render_template('login.html', STATE=state)
 
 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'provider' in login_session and login_session['provider'] == 'null':
-            return redirect(url_for('showLogin'))
+            return flask.redirect(flask.url_for('showLogin'))
         return f(*args, **kwargs)
     return decorated_function
 
 
 @app.route('/gconnect', methods=['POST'])
 def gConnect():
-    if request.args.get('state') != login_session['state']:
+    if flask.request.args.get('state') != login_session['state']:
         response.make_response(json.dumps('Invalid State paramenter'),
                                401)
         response.headers['Content-Type'] = 'application/json'
@@ -81,7 +81,7 @@ def gConnect():
 
     # Obtain authorization code
 
-    code = request.data
+    code = flask.request.data
     try:
 
         # Upgrade the authorization code into a credentials object
@@ -164,9 +164,9 @@ def gConnect():
     login_session['provider'] = 'google'
     if not check_user():
         createUser()
-    return jsonify(name=login_session['name'],
-                   email=login_session['email'],
-                   img=login_session['img'])
+    return flask.jsonify(name=login_session['name'],
+                         email=login_session['email'],
+                         img=login_session['img'])
 
 
 # logout user
@@ -178,7 +178,7 @@ def logout():
 
     if login_session.get('provider') == 'google':
         gdisconnect()
-    return redirect(url_for('index'))
+    return flask.redirect(flask.url_for('index'))
 
 
 @app.route('/gdisconnect')
@@ -229,26 +229,26 @@ def queryAllManga():
 @app.route('/manga/')
 def index():
     manga = session.query(MangaDB).order_by(MangaDB.name)
-    return render_template('home.html', manga=manga, login_session=login_session)
+    return flask.render_template('home.html', manga=manga, login_session=login_session)
 
 
 @app.route('/manga/new/', methods=['GET', 'POST'])
 @login_required
 def newItem():
-    if request.method == 'POST':
-        mangaItem = MangaDB(name=request.form['name'], authorName=request.form['authorName'],
-                            image=request.form['image'], description=request.form['description'],
-                            genre=request.form['genre'], user_id=1)
+    if flask.request.method == 'POST':
+        mangaItem = MangaDB(name=flask.request.form['name'], authorName=flask.request.form['authorName'],
+                            image=flask.request.form['image'], description=flask.request.form['description'],
+                            genre=flask.request.form['genre'], user_id=1)
         session.add(mangaItem)
         session.commit()
-        flash('Item Successfully Added!')
-        return redirect(url_for('index'))
-    return render_template('newItem.html')
+        flask.flash('Item Successfully Added!')
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template('newItem.html')
 
 @app.route('/manga/genre/<string:genre>/')
 def sortManga(genre):
     manga = session.query(MangaDB).filter_by(genre=genre).all()
-    return render_template('home.html', manga=manga, currentPage='home')
+    return flask.render_template('home.html', manga=manga, currentPage='home')
 
 
 @app.route('/manga/genre/<string:genre>/<string:name>/edit', methods=['GET', 'POST'])
@@ -256,40 +256,40 @@ def sortManga(genre):
 def editItem(name, genre):
     manga = session.query(MangaDB).filter_by(name=name, genre=genre).first()
 
-    if request.method == 'POST':
-        if request.form['name']:
-            manga.name = request.form['name']
-        if request.form['authorName']:
-            manga.description = request.form['authorName']
-        if request.form['image']:
-            manga.image = request.form['image']
-        if request.form['description']:
-            manga.description = request.form['description']
-        if request.form['genre']:
-            manga.description = request.form['genre']
+    if flask.request.method == 'POST':
+        if flask.request.form['name']:
+            manga.name = flask.request.form['name']
+        if flask.request.form['authorName']:
+            manga.description = flask.request.form['authorName']
+        if flask.request.form['image']:
+            manga.image = flask.request.form['image']
+        if flask.request.form['description']:
+            manga.description = flask.request.form['description']
+        if flask.request.form['genre']:
+            manga.description = flask.request.form['genre']
         session.add(manga)
         session.commit()
-        flash('Item Successfully Edited!')
-        return redirect(url_for('itemInfo', name=manga.name))
-    return render_template('editItem.html', manga=manga)
+        flask.flash('Item Successfully Edited!')
+        return flask.redirect(flask.url_for('itemInfo', name=manga.name))
+    return flask.render_template('editItem.html', manga=manga)
 
 
 @app.route('/manga/genre/<string:genre>/<string:name>/delete', methods=['GET', 'POST'])
 @login_required
 def deleteItem(name, genre):
     manga = session.query(MangaDB).filter_by(name=name, genre=genre).first()
-    if request.method == 'POST':
+    if flask.request.method == 'POST':
         session.delete(manga)
         session.commit()
-        flash('Item Successfully Been Deleted!')
-        return redirect(url_for('index'))
-    return render_template('deleteItem.html', manga=manga)
+        flask.flash('Item Successfully Been Deleted!')
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template('deleteItem.html', manga=manga)
 
 
 @app.route('/manga/genre/<string:genre>/<string:name>')
 def itemInfo(name, genre):
     manga = session.query(MangaDB).filter_by(name=name, genre=genre).first()
-    return render_template('itemInfo.html', manga=manga, currentPage='info')
+    return flask.render_template('itemInfo.html', manga=manga, currentPage='info')
 
 
 if __name__ == '__main__':
