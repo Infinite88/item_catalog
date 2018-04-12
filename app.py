@@ -16,22 +16,21 @@ from database_setup import MangaDB, User
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from functools import wraps
+import urllib.parse as urlparse
 
 app = Flask(__name__)
-
+url = urlparse.urlparse(os.environ['DATABASE_URL'])
 POSTGRES = {
-    'user': 'godfrey',
-    'pw': 'Per167*Fect',
-    'db': 'manga',
-    'host': 'localhost',
-    'port': '5432',
+    'user': url.username,
+    'password': url.password,
+    'db': url.path[1:],
+    'host': url.hostname,
+    'port': url.port,
 }
 
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES.get("user")}:{POSTGRES.get("pw")}@localhost:5432/{POSTGRES.get("db")}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES.get("user")}:{POSTGRES.get("password")}@{POSTGRES.get("host")}:{POSTGRES.get("port")}/{POSTGRES.get("db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 db = SQLAlchemy(app)
 
 session = db.session
