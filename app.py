@@ -25,6 +25,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 engine = create_engine(DATABASE_URL)
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
