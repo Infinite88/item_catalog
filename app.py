@@ -3,6 +3,7 @@ import string
 import httplib2
 import json
 import requests
+import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, \
     flash, jsonify
 from flask import session as login_session

@@ -4,3 +4,4 @@ SQLAlchemy
 Requests
 dicttoxml
 httplib2
+psycopg2
