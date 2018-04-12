@@ -9,32 +9,36 @@ from flask import Flask, render_template, request, redirect, url_for, \
     flash, jsonify
 from flask import session as login_session
 from flask import make_response
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, MangaDB, User
+from database_setup import MangaDB, User
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from functools import wraps
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://godfrey:Per167*Fect@localhost:5432/manga'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgresql-rectangular-25232:5432/manga'
 
-DATABASE_URL = os.environ['DATABASE_URL']
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(['DATABASE_URL'])
-#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+POSTGRES = {
+    'user': 'godfrey',
+    'pw': 'Per167*Fect',
+    'db': 'manga',
+    'host': 'localhost',
+    'port': '5432',
+}
 
-engine = create_engine(DATABASE_URL)
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-Base.metadata.bind = engine
+app.config['DEBUG'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES.get("user")}:{POSTGRES.get("pw")}@localhost:5432/{POSTGRES.get("db")}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
 
-DBSession = sessionmaker(bind=engine)
-
-session = DBSession()
+session = db.session
 
 secret_file = json.loads(open('client_secret.json', 'r').read())
 CLIENT_ID = secret_file['web']['client_id']
 APPLICATION_NAME = "Manga"
+
+
 
 # validating current loggedin user
 
