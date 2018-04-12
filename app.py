@@ -17,12 +17,12 @@ from oauth2client.client import FlowExchangeError
 from functools import wraps
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql-rectangular-25232'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://flasktest.ctbzdjuureu2.us-west-2.rds.amazonaws.com:5432/manga:5432/manga'
 
-DATABASE_URL = os.environ[app]
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+#DATABASE_URL = os.environ[]
+#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-engine = create_engine('postgresql-rectangular-25232')
+engine = create_engine('postgresql://flasktest.ctbzdjuureu2.us-west-2.rds.amazonaws.com:5432/manga:5432/manga')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
