@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 
 from database_setup import Base, User, MangaDB
 
-engine = create_engine('postgresql://godfrey:Per167*Fect@localhost:5432/manga')
+engine = create_engine('postgresql-rectangular-25232')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine
