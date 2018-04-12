@@ -18,10 +18,10 @@ from functools import wraps
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://godfrey:Per167*Fect@localhost:5432/manga'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgresql-rectangular-25232:5432/manga'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgresql-rectangular-25232:5432/manga'
 
 #DATABASE_URL = os.environ['postgresql://postgresql-rectangular-25232:5432/manga']
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['postgresql://postgresql-rectangular-25232:5432/manga']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(['DATABASE_URL'])
 #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 engine = create_engine('postgresql://postgresql-rectangular-25232:5432/manga')
