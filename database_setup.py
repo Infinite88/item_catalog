@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, validates
 from sqlalchemy import create_engine
+from app import engine
 
 Base = declarative_base()
 
@@ -49,5 +50,4 @@ class MangaDB(Base):
         }
 
 
-engine = create_engine('postgresql://godfrey:Per167*Fect@localhost:5432/manga')
 Base.metadata.create_all(engine)
