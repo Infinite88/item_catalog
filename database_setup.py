@@ -4,7 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, validates
 from sqlalchemy import create_engine
-from app import engine
+from app import DATABASE_URL
 
 Base = declarative_base()
 
@@ -49,5 +49,5 @@ class MangaDB(Base):
 
         }
 
-
+engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
