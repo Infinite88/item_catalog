@@ -6,4 +6,5 @@ Requests
 dicttoxml
 httplib2
 psycopg2
+psycopg2-binary
 gunicorn
