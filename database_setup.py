@@ -4,7 +4,6 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, validates
 from sqlalchemy import create_engine
-from app import DATABASE_URL
 
 Base = declarative_base()
 
