@@ -1,3 +1,4 @@
+import os
 import random
 import string
 import httplib2
@@ -16,7 +17,10 @@ from oauth2client.client import FlowExchangeError
 from functools import wraps
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://godfrey:Per167*Fect@postgresql-rectangular-25232)/manga'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://godfrey:Per167*Fect@localhost:5432/manga'
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 engine = create_engine('postgresql://godfrey:Per167*Fect@localhost:5432/manga')
 Base.metadata.bind = engine
