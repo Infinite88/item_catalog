@@ -24,7 +24,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgresql-rectangular-252
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['postgresql://postgresql-rectangular-25232:5432/manga']
 #conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-engine = create_engine('postgresql://godfrey:Per167*Fect@localhost:5432/manga')
+engine = create_engine('postgresql://postgresql-rectangular-25232:5432/manga')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
