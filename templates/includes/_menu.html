@@ -1,28 +1,51 @@
  <header>
     <div class="mdl-layout__drawer">
-     <div class="navbar-fixed">
-         <nav class="mdl-navigation purple darken-4">
-             <div class="nav-wrapper ">
-                 <a href="/" class="brand-logo">Manga</a>
-                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                     <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Action')}}">Action</a></li>
-                     <li><a href="/">Adventure</a></li>
-                     <li><a href="/">Comedy</a></li>
-                     <li><a href="/">Drama</a></li>
-                     <li><a href="/">Fantasy</a></li>
-                     <li><a href="/">Supernatural</a></li>
-                     <li><a href="/">Horror</a></li>
-                     <li><a href="/">Mystery</a></li>
-                     <li class="active"><a href="/">Sci-Fi</a></li>
+        <div class="navbar-fixed">
+            <nav class="mdl-navigation purple darken-4">
+                <div class="nav-wrapper">
+                    <a href="/" class="brand-logo">Manga</a>
+                    <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Action')}}">Action</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Adventure')}}">Adventure</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Comedy')}}">Comedy</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Drama')}}">Drama</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Fantasy')}}">Fantasy</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Supernatural')}}">Supernatural</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Horror')}}">Horror</a></li>
+                        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Mystery')}}">Mystery</a></li>
+                        <li class="active"><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Sci-Fi')}}">Sci-Fi</a></li>
 
-                     <li><a href="{{ url_for('newItem') }}" class=><i class="material-icons">add</i></a></li>
-                     {% if session.get('provider') == 'google' %}
-                         <li><a href="{{ url_for('logout') }}"><button class="waves-effect waves-light btn">Logout</button></a></li>
-                     {% else %}
-                        <li><a href="{{ url_for('showLogin') }}" class="waves-effect waves-light btn">Login</a></li>
-                     {% endif %}
-                 </ul>
-             </div>
-         </nav>
-     </div></div>
- </header>
+                        <li><a href="{{ url_for('newItem') }}" class=><i class="material-icons">add</i></a></li>
+                        {% if session.get('provider') == 'google' %}
+                            <li><a href="{{ url_for('logout') }}"><button class="waves-effect waves-light btn">Logout</button></a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('showLogin') }}" class="waves-effect waves-light btn">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+              </nav>
+        </div>
+    </div>
+
+    <ul class="sidenav" id="mobile-nav">
+        {% if session.get('provider') == 'google' %}
+            <li><a href="{{ url_for('logout') }}"><button class="waves-effect waves-light btn">Logout</button></a></li>
+        {% else %}
+            <li><a href="{{ url_for('showLogin') }}" class="waves-effect waves-light btn">Login</a></li>
+        {% endif %}
+
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Action')}}">Action</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Adventure')}}">Adventure</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Comdey')}}">Comedy</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Drama')}}">Drama</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Fantasy')}}">Fantasy</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Supernatura')}}">Supernatural</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Horror')}}">Horror</a></li>
+        <li><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Mystery')}}">Mystery</a></li>
+        <li class="active"><a class="mdl-navigation__link" href="{{ url_for('sortManga', genre='Sci-Fi')}}">Sci-Fi</a></li>
+
+        <li><a href="{{ url_for('newItem') }}" class=><i class="material-icons">add</i></a></li>
+
+    </ul>
+</header>

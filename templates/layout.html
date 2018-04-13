@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google-signin-client_id" content="238648918120-21v6f3rt69vd17f1gmvhpbsjq598rv1t.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -10,6 +12,7 @@
 </head>
 <body>
     {% include'includes/_menu.html' %}
+    {% include 'includes/_slider.html' %}
     <div class="container">
         {% block body %}{% endblock %}
     </div>
@@ -47,6 +50,10 @@
                 });
             }
         }
+        $(document).ready(function(){
+    $('.sidenav').sidenav();
+    $('.slider').slider();
+  });
     </script>
 </body>
 </html>

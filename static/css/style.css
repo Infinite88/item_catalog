@@ -7,11 +7,19 @@ body {
     margin: 3vh 1em;
 }
 
-img{
+.card img {
     height: 400px;
-
 }
 
 nav {
     padding: 0 20px;
+}
+
+.container .row{
+    margin: 0 auto;
+}
+
+#edit button {
+    margin: 10px 100px;
+    display: inline-block;
 }

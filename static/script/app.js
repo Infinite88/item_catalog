@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
 $(".brighten").click(function() {
   window.location = $(this).find("a").attr("href");
   return false;
@@ -9,7 +13,7 @@ $(".demo-card-wide").hover(
 
     }
 );
-var hide = {
+const hide = {
     loginbutton: function(){
       $('.signInButtonTitle').hide();
       $('.signOutButtonTitle').show();
@@ -33,14 +37,14 @@ else{
   hide.loginbutton();
 }
 
-var notification = document.querySelector('.mdl-js-snackbar');
+const notification = document.querySelector('.mdl-js-snackbar');
 
-var validateDetails = function() {
-  var bookname = $('#bookname');
-  var authorname = $('#authorname');
-  var coverUrl = $('#coverurl');
-  var description = $('#description');
-  var category = $('#category');
+const validateDetails = function() {
+  const bookname = $('#bookname');
+  const authorname = $('#authorname');
+  const coverUrl = $('#coverurl');
+  const description = $('#description');
+  const category = $('#category');
 
   if (bookname.val() == "") {
     notification.MaterialSnackbar.showSnackbar(
@@ -91,7 +95,7 @@ var validateDetails = function() {
 
 };
 
-var googleSignInCallback = function(authResult){
+const googleSignInCallback = function(authResult){
     if (authResult['code']){
         $.ajax({
             type: 'POST',
@@ -101,7 +105,7 @@ var googleSignInCallback = function(authResult){
             data: authResult['code'],
             success: function(result){
                 if(result){
-                    var img = result['img'].replace('https','http');
+                    const img = result['img'].replace('https','http');
                     hide.loginbutton();
                     $('#userImg').attr('src',img);
                     $('#userName').html(result['name']);
@@ -120,7 +124,7 @@ var googleSignInCallback = function(authResult){
 };
 
 
-var logout = function(){
+const logout = function(){
 
    if(logged=='google'){
 
@@ -201,3 +205,6 @@ $('#logout_button').click(function(){
 $('#logout_button1').click(function() {
   logout();
 });
+
+
+

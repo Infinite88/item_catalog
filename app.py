@@ -283,7 +283,7 @@ def editItem(name, genre):
         session.add(manga)
         session.commit()
         flash('Item Successfully Edited!')
-        return redirect(url_for('itemInfo', name=manga.name))
+        return redirect(url_for('itemInfo', name=manga.name, genre=manga.genre))
     return render_template('editItem.html', manga=manga)
 
 
